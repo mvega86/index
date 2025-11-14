@@ -1,0 +1,14 @@
+name: Prueba CI simple
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+      
+      - name: Dar permisos al script
+        run: chmod +x test.sh
+      
+      - name: Ejecutar test
+        run: ./test.sh
