@@ -1,0 +1,22 @@
+name: Pipeline CI/CD
+on:
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+      
+      - name: Ejecutar tests
+        run: bash buscar.sh
+      
+      - name: Construir imagen Docker
+        run: docker build -t miweb:latest .
+      
+      - name: Simular despliegue
+        run: |
+          echo "Desplegando en entorno local..."
+          docker run -d -p 8080:80 miweb:latest
+          echo "Aplicación disponible en http://localhost:8080"
